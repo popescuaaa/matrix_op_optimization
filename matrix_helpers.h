@@ -140,10 +140,10 @@ double* multiply_opt(int N, double* A, double* B)
             sum += *pa * *pb;
             pa++;
             pb += N;
-            // sum += A[li * N + hi] * B[hi * N + ci];
         }
 
         R[li * N + ci] = sum;
+        
       }
     }
     
