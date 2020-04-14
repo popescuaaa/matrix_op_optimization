@@ -93,7 +93,7 @@ double* my_solver(int N, double *A, double *B) {
 		A, 
 		N,
 		beta, 
-		A2, 
+		A2,
 		N
 	);
 
