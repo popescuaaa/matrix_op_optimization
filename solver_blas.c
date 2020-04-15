@@ -6,7 +6,7 @@
 #include "cblas.h"
 #include "utils.h"
 #include <sys/resource.h>
-
+#define BAD_ALLOC 12
 /* 
  * Add your BLAS implementation here
  */
