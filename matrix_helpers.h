@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define BAD_ALLOC 12
-
+#include <stdio.h>
 /**
  * @param: N: int - the number of elements per column / line
  * @param: M: double* - the matrix stored as a vector N * N 
@@ -125,23 +125,15 @@ double* multiply_opt(int N, double* A, double* B)
     double *R = (double *) malloc(N * N * sizeof(double));
     if (R == NULL)
         exit(BAD_ALLOC);
-
+    register double* pa = A;
+    register double* pb = B;
+	
     for (li = 0; li < N; li++) {
-
-        double *orig_pa = A + li;
-
       for (ci = 0; ci < N; ci++) {
-        
-        double *pa = orig_pa;
-        double *pb = B + ci;
         register double sum = 0.0;
-
-	    for (hi = 0; hi < N; hi++) {
-            sum += *pa * *pb;
-            pa++;
-            pb += N;
+	for (hi = 0; hi < N; hi++) {
+	    sum += *(pa + li * N + hi) + *(pb + hi * N + ci);
         }
-
         R[li * N + ci] = sum;
         
       }
