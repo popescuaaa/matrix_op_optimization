@@ -19,9 +19,9 @@ double* my_solver(int N, double *A, double* B)
 	{
 		for (ci = 0; ci < N; ci++)
 		{	
-			printf("%lf ", A[li * N + ci]);
+			//printf("%lf ", A[li * N + ci]);
 		}
-		printf("\n");
+		//printf("\n");
 	}
 	
 	double* A2 = multiply_opt(N, A, A);
@@ -30,9 +30,9 @@ double* my_solver(int N, double *A, double* B)
 	{
 		for (ci = 0; ci < N; ci++)
 		{	
-			printf("%lf ", A2[li * N + ci]);
+			//printf("%lf ", A2[li * N + ci]);
 		}
-		printf("\n");
+		//printf("\n");
 	}
 
 	double* T1 = multiply_opt(N, B, At);
