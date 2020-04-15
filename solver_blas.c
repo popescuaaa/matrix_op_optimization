@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "cblas.h"
 #include "utils.h"
-#include "matrix_helpers.h"
 #include <sys/resource.h>
 
 /* 
@@ -41,6 +40,8 @@ double* my_solver(int N, double *A, double *B) {
 	double* A2;
 	double* A2_B;
 	double* R;
+	size_t li;
+	size_t ci;
 	
 	posix_memalign((void**) &B_At, 64, N * N * sizeof(double));
 	if (B_At == NULL)
@@ -115,7 +116,11 @@ double* my_solver(int N, double *A, double *B) {
 		N
 	);
 	
-	R = matrix_add(N, B_At, A2_B);
+	for (li = 0; li < N; li++) {
+		for (ci = 0; ci < N; ci++) {
+			R[li * N + ci] = B_At[li * N + ci] + A2_B[li * N + ci];
+		}
+	}
 
 	free(B_At);
 	free(A2_B);
