@@ -133,17 +133,17 @@ double* multiply_opt(int N, double* A, double* B)
       for (ci = 0; ci < N; ci++) {
         
         double *pa = orig_pa;
-        double *pb = B + ci;
+        double *pb = B;
         register double sum = 0.0;
 
 	    for (hi = 0; hi < N; hi++) {
-            sum += *pa * *pb;
+            sum += *pa * *(pb + hi * N + ci);
             pa++;
-            pb += N;
+            //pb += N;
         }
 
         R[li * N + ci] = sum;
-        
+
       }
     }
     
