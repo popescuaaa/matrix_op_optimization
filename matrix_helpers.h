@@ -133,7 +133,8 @@ double* multiply_opt(int N, double* A, double* B)
         register double* pb = B + ci;
         register double sum = 0.0;
 	    for (hi = 0; hi < N; hi++) {
-	        sum += *pa + *pb;
+            printf("Vavlue1: %lf \n Value2: %lf \n", A[li * N + hi] * B[hi * N + ci], *pa * *pb);
+            sum += *pa + *pb;
             pa ++;
             pb += N;
         }

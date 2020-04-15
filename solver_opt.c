@@ -12,29 +12,7 @@ double* my_solver(int N, double *A, double* B)
 {
 	/* Computing the main parameters used for computation */ 
 	double* At = transpose(N, A);
-	int li;
-	int ci;
-	printf("A:\n");
-	for (li = 0; li < N; li++)
-	{
-		for (ci = 0; ci < N; ci++)
-		{	
-			//printf("%lf ", A[li * N + ci]);
-		}
-		//printf("\n");
-	}
-	
 	double* A2 = multiply_opt(N, A, A);
-	printf("A2:\n");
-	for (li = 0; li < N; li++)
-	{
-		for (ci = 0; ci < N; ci++)
-		{	
-			//printf("%lf ", A2[li * N + ci]);
-		}
-		//printf("\n");
-	}
-
 	double* T1 = multiply_opt(N, B, At);
 	double* T2 = multiply_opt(N, A2, B);
 
