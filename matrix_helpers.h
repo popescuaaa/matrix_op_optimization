@@ -125,17 +125,20 @@ double* multiply_opt(int N, double* A, double* B)
     double *R = (double *) malloc(N * N * sizeof(double));
     if (R == NULL)
         exit(BAD_ALLOC);
-    register double* pa = A;
-    register double* pb = B;
-	
+    
     for (li = 0; li < N; li++) {
+        register double* orig_pa = A + li * N;
       for (ci = 0; ci < N; ci++) {
+        register double* pa = orig_pa;
+        register double* pb = B + ci;
         register double sum = 0.0;
-	for (hi = 0; hi < N; hi++) {
-	    sum += *(pa + li * N + hi) + *(pb + hi * N + ci);
+	    for (hi = 0; hi < N; hi++) {
+	        sum += *pa + *pb;
+            pa ++;
+            pb += N;
         }
-        R[li * N + ci] = sum;
 
+        R[li * N + ci] = sum;
       }
     }
     
