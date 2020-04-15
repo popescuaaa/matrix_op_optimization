@@ -1,59 +1,626 @@
-/*
- * Tema 2 ASC
- * 2020 Spring
- */
 #include "utils.h"
-#include "matrix_helpers.h"
+#define BLOCK_SIZE 40
 
-/*
- * Add your optimized implementation here
- */
-double* my_solver(int N, double *A, double* B) 
-{
-	/* Computing the main parameters used for computation */ 
-	size_t li;
-	size_t ci;
-	for (li = 0; li < N; li++) {
-		for (ci = 0; ci < N; ci++) {
-			printf("%lf ", A[li * N + ci]);
-		}
-		printf("\n");
-	}
+void betaMult2(int N, double *A, double *Bt, double *C){
+	int num = N/BLOCK_SIZE;
+	double sum[8][8];
+	int coefA[8];
+	int coefB[8];
+	int coefC[8][8];
 
-	double* At = transpose(N, A);
-	for (li = 0; li < N; li++) {
-		for (ci = 0; ci < N; ci++) {
-			printf("%lf ", At[li * N + ci]);
-		}
-		printf("\n");
-	}
-	double* A2 = multiply_opt(N, A, A);
-	for (li = 0; li < N; li++) {
-		for (ci = 0; ci < N; ci++) {
-			printf("%lf ", A2[li * N + ci]);
-		}
-		printf("\n");
-	}
-	double* T1 = multiply_opt(N, B, At);
-	for (li = 0; li < N; li++) {
-		for (ci = 0; ci < N; ci++) {
-			printf("%lf ", T1[li * N + ci]);
-		}
-		printf("\n");
-	}
-	double* T2 = multiply_opt(N, A2, B);
-	for (li = 0; li < N; li++) {
-		for (ci = 0; ci < N; ci++) {
-			printf("%lf ", T2[li * N + ci]);
-		}
-		printf("\n");
-	}
-	double* R = matrix_add(N, T1, T2);
-	
-	free(At);
-	free(A2);
-	free(T1);
-	free(T2);
+	int i,j,k,m,r,p;
+	for(i = 0; i < num; i++)
+		for(j = i; j < num; j++)
+			for(k = 0; k < BLOCK_SIZE; k+=8)
+				for(m = 0; m < BLOCK_SIZE; m+=8){
+					sum[0][0] = 0.0;
+					sum[0][1] = 0.0;
+					sum[0][2] = 0.0;
+					sum[0][3] = 0.0;
+					sum[0][4] = 0.0;
+					sum[0][5] = 0.0;
+					sum[0][6] = 0.0;
+					sum[0][7] = 0.0;
+					sum[1][0] = 0.0;
+					sum[1][1] = 0.0;
+					sum[1][2] = 0.0;
+					sum[1][3] = 0.0;
+					sum[1][4] = 0.0;
+					sum[1][5] = 0.0;
+					sum[1][6] = 0.0;
+					sum[1][7] = 0.0;
+					sum[2][0] = 0.0;
+					sum[2][1] = 0.0;
+					sum[2][2] = 0.0;
+					sum[2][3] = 0.0;
+					sum[2][4] = 0.0;
+					sum[2][5] = 0.0;
+					sum[2][6] = 0.0;
+					sum[2][7] = 0.0;
+					sum[3][0] = 0.0;
+					sum[3][1] = 0.0;
+					sum[3][2] = 0.0;
+					sum[3][3] = 0.0;
+					sum[3][4] = 0.0;
+					sum[3][5] = 0.0;
+					sum[3][6] = 0.0;
+					sum[3][7] = 0.0;
+					sum[4][0] = 0.0;
+					sum[4][1] = 0.0;
+					sum[4][2] = 0.0;
+					sum[4][3] = 0.0;
+					sum[4][4] = 0.0;
+					sum[4][5] = 0.0;
+					sum[4][6] = 0.0;
+					sum[4][7] = 0.0;
+					sum[5][0] = 0.0;
+					sum[5][1] = 0.0;
+					sum[5][2] = 0.0;
+					sum[5][3] = 0.0;
+					sum[5][4] = 0.0;
+					sum[5][5] = 0.0;
+					sum[5][6] = 0.0;
+					sum[5][7] = 0.0;
+					sum[6][0] = 0.0;
+					sum[6][1] = 0.0;
+					sum[6][2] = 0.0;
+					sum[6][3] = 0.0;
+					sum[6][4] = 0.0;
+					sum[6][5] = 0.0;
+					sum[6][6] = 0.0;
+					sum[6][7] = 0.0;
+					sum[7][0] = 0.0;
+					sum[7][1] = 0.0;
+					sum[7][2] = 0.0;
+					sum[7][3] = 0.0;
+					sum[7][4] = 0.0;
+					sum[7][5] = 0.0;
+					sum[7][6] = 0.0;
+					sum[7][7] = 0.0;
+					coefA[0] = i * BLOCK_SIZE*N + k * N - 1;
+					coefB[0] = j * BLOCK_SIZE * N + m*N - 1;
+					for(r = 0 ; r < num; r++)
+						for(p = 0; p < BLOCK_SIZE; p++){
+							coefA[0]++;
+							coefB[0]++;
+							coefA[1] = coefA[0] + N;
+							coefA[2] = coefA[1] + N;
+							coefA[3] = coefA[2] + N;
+							coefA[4] = coefA[3] + N;
+							coefA[5] = coefA[4] + N;
+							coefA[6] = coefA[5] + N;
+							coefA[7] = coefA[6] + N;
+							coefB[1] = coefB[0] + N;
+							coefB[2] = coefB[1] + N;
+							coefB[3] = coefB[2] + N;
+							coefB[4] = coefB[3] + N;
+							coefB[5] = coefB[4] + N;
+							coefB[6] = coefB[5] + N;
+							coefB[7] = coefB[6] + N;
+							sum[0][0] += A[coefA[0]] * Bt[coefB[0]];
+							sum[0][1] += A[coefA[0]] * Bt[coefB[1]];
+							sum[0][2] += A[coefA[0]] * Bt[coefB[2]];
+							sum[0][3] += A[coefA[0]] * Bt[coefB[3]];
+							sum[0][4] += A[coefA[0]] * Bt[coefB[4]];
+							sum[0][5] += A[coefA[0]] * Bt[coefB[5]];
+							sum[0][6] += A[coefA[0]] * Bt[coefB[6]];
+							sum[0][7] += A[coefA[0]] * Bt[coefB[7]];
+							sum[1][0] += A[coefA[1]] * Bt[coefB[0]];
+							sum[1][1] += A[coefA[1]] * Bt[coefB[1]];
+							sum[1][2] += A[coefA[1]] * Bt[coefB[2]];
+							sum[1][3] += A[coefA[1]] * Bt[coefB[3]];
+							sum[1][4] += A[coefA[1]] * Bt[coefB[4]];
+							sum[1][5] += A[coefA[1]] * Bt[coefB[5]];
+							sum[1][6] += A[coefA[1]] * Bt[coefB[6]];
+							sum[1][7] += A[coefA[1]] * Bt[coefB[7]];
+							sum[2][0] += A[coefA[2]] * Bt[coefB[0]];
+							sum[2][1] += A[coefA[2]] * Bt[coefB[1]];
+							sum[2][2] += A[coefA[2]] * Bt[coefB[2]];
+							sum[2][3] += A[coefA[2]] * Bt[coefB[3]];
+							sum[2][4] += A[coefA[2]] * Bt[coefB[4]];
+							sum[2][5] += A[coefA[2]] * Bt[coefB[5]];
+							sum[2][6] += A[coefA[2]] * Bt[coefB[6]];
+							sum[2][7] += A[coefA[2]] * Bt[coefB[7]];
+							sum[3][0] += A[coefA[3]] * Bt[coefB[0]];
+							sum[3][1] += A[coefA[3]] * Bt[coefB[1]];
+							sum[3][2] += A[coefA[3]] * Bt[coefB[2]];
+							sum[3][3] += A[coefA[3]] * Bt[coefB[3]];
+							sum[3][4] += A[coefA[3]] * Bt[coefB[4]];
+							sum[3][5] += A[coefA[3]] * Bt[coefB[5]];
+							sum[3][6] += A[coefA[3]] * Bt[coefB[6]];
+							sum[3][7] += A[coefA[3]] * Bt[coefB[7]];
+							sum[4][0] += A[coefA[4]] * Bt[coefB[0]];
+							sum[4][1] += A[coefA[4]] * Bt[coefB[1]];
+							sum[4][2] += A[coefA[4]] * Bt[coefB[2]];
+							sum[4][3] += A[coefA[4]] * Bt[coefB[3]];
+							sum[4][4] += A[coefA[4]] * Bt[coefB[4]];
+							sum[4][5] += A[coefA[4]] * Bt[coefB[5]];
+							sum[4][6] += A[coefA[4]] * Bt[coefB[6]];
+							sum[4][7] += A[coefA[4]] * Bt[coefB[7]];
+							sum[5][0] += A[coefA[5]] * Bt[coefB[0]];
+							sum[5][1] += A[coefA[5]] * Bt[coefB[1]];
+							sum[5][2] += A[coefA[5]] * Bt[coefB[2]];
+							sum[5][3] += A[coefA[5]] * Bt[coefB[3]];
+							sum[5][4] += A[coefA[5]] * Bt[coefB[4]];
+							sum[5][5] += A[coefA[5]] * Bt[coefB[5]];
+							sum[5][6] += A[coefA[5]] * Bt[coefB[6]];
+							sum[5][7] += A[coefA[5]] * Bt[coefB[7]];
+							sum[6][0] += A[coefA[6]] * Bt[coefB[0]];
+							sum[6][1] += A[coefA[6]] * Bt[coefB[1]];
+							sum[6][2] += A[coefA[6]] * Bt[coefB[2]];
+							sum[6][3] += A[coefA[6]] * Bt[coefB[3]];
+							sum[6][4] += A[coefA[6]] * Bt[coefB[4]];
+							sum[6][5] += A[coefA[6]] * Bt[coefB[5]];
+							sum[6][6] += A[coefA[6]] * Bt[coefB[6]];
+							sum[6][7] += A[coefA[6]] * Bt[coefB[7]];
+							sum[7][0] += A[coefA[7]] * Bt[coefB[0]];
+							sum[7][1] += A[coefA[7]] * Bt[coefB[1]];
+							sum[7][2] += A[coefA[7]] * Bt[coefB[2]];
+							sum[7][3] += A[coefA[7]] * Bt[coefB[3]];
+							sum[7][4] += A[coefA[7]] * Bt[coefB[4]];
+							sum[7][5] += A[coefA[7]] * Bt[coefB[5]];
+							sum[7][6] += A[coefA[7]] * Bt[coefB[6]];
+							sum[7][7] += A[coefA[7]] * Bt[coefB[7]];
+						}
+					coefC[0][0] = i*BLOCK_SIZE*N + j * BLOCK_SIZE + k*N + m;
+					C[coefC[0][0]] = sum[0][0];
+					coefC[0][1] = coefC[0][0] + 1;
+					C[coefC[0][1]] = sum[0][1];
+					coefC[0][2] = coefC[0][1] + 1;
+					C[coefC[0][2]] = sum[0][2];
+					coefC[0][3] = coefC[0][2] + 1;
+					C[coefC[0][3]] = sum[0][3];
+					coefC[0][4] = coefC[0][3] + 1;
+					C[coefC[0][4]] = sum[0][4];
+					coefC[0][5] = coefC[0][4] + 1;
+					C[coefC[0][5]] = sum[0][5];
+					coefC[0][6] = coefC[0][5] + 1;
+					C[coefC[0][6]] = sum[0][6];
+					coefC[0][7] = coefC[0][6] + 1;
+					C[coefC[0][7]] = sum[0][7];
+					coefC[1][0] = coefC[0][0] + N;
+					C[coefC[1][0]] = sum[1][0];
+					coefC[1][1] = coefC[1][0] + 1;
+					C[coefC[1][1]] = sum[1][1];
+					coefC[1][2] = coefC[1][1] + 1;
+					C[coefC[1][2]] = sum[1][2];
+					coefC[1][3] = coefC[1][2] + 1;
+					C[coefC[1][3]] = sum[1][3];
+					coefC[1][4] = coefC[1][3] + 1;
+					C[coefC[1][4]] = sum[1][4];
+					coefC[1][5] = coefC[1][4] + 1;
+					C[coefC[1][5]] = sum[1][5];
+					coefC[1][6] = coefC[1][5] + 1;
+					C[coefC[1][6]] = sum[1][6];
+					coefC[1][7] = coefC[1][6] + 1;
+					C[coefC[1][7]] = sum[1][7];
+					coefC[2][0] = coefC[1][0] + N;
+					C[coefC[2][0]] = sum[2][0];
+					coefC[2][1] = coefC[2][0] + 1;
+					C[coefC[2][1]] = sum[2][1];
+					coefC[2][2] = coefC[2][1] + 1;
+					C[coefC[2][2]] = sum[2][2];
+					coefC[2][3] = coefC[2][2] + 1;
+					C[coefC[2][3]] = sum[2][3];
+					coefC[2][4] = coefC[2][3] + 1;
+					C[coefC[2][4]] = sum[2][4];
+					coefC[2][5] = coefC[2][4] + 1;
+					C[coefC[2][5]] = sum[2][5];
+					coefC[2][6] = coefC[2][5] + 1;
+					C[coefC[2][6]] = sum[2][6];
+					coefC[2][7] = coefC[2][6] + 1;
+					C[coefC[2][7]] = sum[2][7];
+					coefC[3][0] = coefC[2][0] + N;
+					C[coefC[3][0]] = sum[3][0];
+					coefC[3][1] = coefC[3][0] + 1;
+					C[coefC[3][1]] = sum[3][1];
+					coefC[3][2] = coefC[3][1] + 1;
+					C[coefC[3][2]] = sum[3][2];
+					coefC[3][3] = coefC[3][2] + 1;
+					C[coefC[3][3]] = sum[3][3];
+					coefC[3][4] = coefC[3][3] + 1;
+					C[coefC[3][4]] = sum[3][4];
+					coefC[3][5] = coefC[3][4] + 1;
+					C[coefC[3][5]] = sum[3][5];
+					coefC[3][6] = coefC[3][5] + 1;
+					C[coefC[3][6]] = sum[3][6];
+					coefC[3][7] = coefC[3][6] + 1;
+					C[coefC[3][7]] = sum[3][7];
+					coefC[4][0] = coefC[3][0] + N;
+					C[coefC[4][0]] = sum[4][0];
+					coefC[4][1] = coefC[4][0] + 1;
+					C[coefC[4][1]] = sum[4][1];
+					coefC[4][2] = coefC[4][1] + 1;
+					C[coefC[4][2]] = sum[4][2];
+					coefC[4][3] = coefC[4][2] + 1;
+					C[coefC[4][3]] = sum[4][3];
+					coefC[4][4] = coefC[4][3] + 1;
+					C[coefC[4][4]] = sum[4][4];
+					coefC[4][5] = coefC[4][4] + 1;
+					C[coefC[4][5]] = sum[4][5];
+					coefC[4][6] = coefC[4][5] + 1;
+					C[coefC[4][6]] = sum[4][6];
+					coefC[4][7] = coefC[4][6] + 1;
+					C[coefC[4][7]] = sum[4][7];
+					coefC[5][0] = coefC[4][0] + N;
+					C[coefC[5][0]] = sum[5][0];
+					coefC[5][1] = coefC[5][0] + 1;
+					C[coefC[5][1]] = sum[5][1];
+					coefC[5][2] = coefC[5][1] + 1;
+					C[coefC[5][2]] = sum[5][2];
+					coefC[5][3] = coefC[5][2] + 1;
+					C[coefC[5][3]] = sum[5][3];
+					coefC[5][4] = coefC[5][3] + 1;
+					C[coefC[5][4]] = sum[5][4];
+					coefC[5][5] = coefC[5][4] + 1;
+					C[coefC[5][5]] = sum[5][5];
+					coefC[5][6] = coefC[5][5] + 1;
+					C[coefC[5][6]] = sum[5][6];
+					coefC[5][7] = coefC[5][6] + 1;
+					C[coefC[5][7]] = sum[5][7];
+					coefC[6][0] = coefC[5][0] + N;
+					C[coefC[6][0]] = sum[6][0];
+					coefC[6][1] = coefC[6][0] + 1;
+					C[coefC[6][1]] = sum[6][1];
+					coefC[6][2] = coefC[6][1] + 1;
+					C[coefC[6][2]] = sum[6][2];
+					coefC[6][3] = coefC[6][2] + 1;
+					C[coefC[6][3]] = sum[6][3];
+					coefC[6][4] = coefC[6][3] + 1;
+					C[coefC[6][4]] = sum[6][4];
+					coefC[6][5] = coefC[6][4] + 1;
+					C[coefC[6][5]] = sum[6][5];
+					coefC[6][6] = coefC[6][5] + 1;
+					C[coefC[6][6]] = sum[6][6];
+					coefC[6][7] = coefC[6][6] + 1;
+					C[coefC[6][7]] = sum[6][7];
+					coefC[7][0] = coefC[6][0] + N;
+					C[coefC[7][0]] = sum[7][0];
+					coefC[7][1] = coefC[7][0] + 1;
+					C[coefC[7][1]] = sum[7][1];
+					coefC[7][2] = coefC[7][1] + 1;
+					C[coefC[7][2]] = sum[7][2];
+					coefC[7][3] = coefC[7][2] + 1;
+					C[coefC[7][3]] = sum[7][3];
+					coefC[7][4] = coefC[7][3] + 1;
+					C[coefC[7][4]] = sum[7][4];
+					coefC[7][5] = coefC[7][4] + 1;
+					C[coefC[7][5]] = sum[7][5];
+					coefC[7][6] = coefC[7][5] + 1;
+					C[coefC[7][6]] = sum[7][6];
+					coefC[7][7] = coefC[7][6] + 1;
+					C[coefC[7][7]] = sum[7][7];
 
-	return R;	
+				}
 }
+
+void betaMult(int N, double *A, double *Bt, double *C){
+	int num = N/BLOCK_SIZE;
+	double sum[8][8];
+	int coefA[8];
+	int coefB[8];
+	int coefC[8][8];
+
+	int i,j,k,m,r,p;
+	for(i = 0; i < num; i++)
+		for(j = 0; j < num; j++)
+			for(k = 0; k < BLOCK_SIZE; k+=8)
+				for(m = 0; m < BLOCK_SIZE; m+=8){
+					sum[0][0] = 0.0;
+					sum[0][1] = 0.0;
+					sum[0][2] = 0.0;
+					sum[0][3] = 0.0;
+					sum[0][4] = 0.0;
+					sum[0][5] = 0.0;
+					sum[0][6] = 0.0;
+					sum[0][7] = 0.0;
+					sum[1][0] = 0.0;
+					sum[1][1] = 0.0;
+					sum[1][2] = 0.0;
+					sum[1][3] = 0.0;
+					sum[1][4] = 0.0;
+					sum[1][5] = 0.0;
+					sum[1][6] = 0.0;
+					sum[1][7] = 0.0;
+					sum[2][0] = 0.0;
+					sum[2][1] = 0.0;
+					sum[2][2] = 0.0;
+					sum[2][3] = 0.0;
+					sum[2][4] = 0.0;
+					sum[2][5] = 0.0;
+					sum[2][6] = 0.0;
+					sum[2][7] = 0.0;
+					sum[3][0] = 0.0;
+					sum[3][1] = 0.0;
+					sum[3][2] = 0.0;
+					sum[3][3] = 0.0;
+					sum[3][4] = 0.0;
+					sum[3][5] = 0.0;
+					sum[3][6] = 0.0;
+					sum[3][7] = 0.0;
+					sum[4][0] = 0.0;
+					sum[4][1] = 0.0;
+					sum[4][2] = 0.0;
+					sum[4][3] = 0.0;
+					sum[4][4] = 0.0;
+					sum[4][5] = 0.0;
+					sum[4][6] = 0.0;
+					sum[4][7] = 0.0;
+					sum[5][0] = 0.0;
+					sum[5][1] = 0.0;
+					sum[5][2] = 0.0;
+					sum[5][3] = 0.0;
+					sum[5][4] = 0.0;
+					sum[5][5] = 0.0;
+					sum[5][6] = 0.0;
+					sum[5][7] = 0.0;
+					sum[6][0] = 0.0;
+					sum[6][1] = 0.0;
+					sum[6][2] = 0.0;
+					sum[6][3] = 0.0;
+					sum[6][4] = 0.0;
+					sum[6][5] = 0.0;
+					sum[6][6] = 0.0;
+					sum[6][7] = 0.0;
+					sum[7][0] = 0.0;
+					sum[7][1] = 0.0;
+					sum[7][2] = 0.0;
+					sum[7][3] = 0.0;
+					sum[7][4] = 0.0;
+					sum[7][5] = 0.0;
+					sum[7][6] = 0.0;
+					sum[7][7] = 0.0;
+					coefA[0] = i * BLOCK_SIZE*N + k * N - 1;
+					coefB[0] = j * BLOCK_SIZE * N + m*N - 1;
+					for(r = 0 ; r < num; r++)
+						for(p = 0; p < BLOCK_SIZE; p++){
+							coefA[0]++;
+							coefB[0]++;
+							coefA[1] = coefA[0] + N;
+							coefA[2] = coefA[1] + N;
+							coefA[3] = coefA[2] + N;
+							coefA[4] = coefA[3] + N;
+							coefA[5] = coefA[4] + N;
+							coefA[6] = coefA[5] + N;
+							coefA[7] = coefA[6] + N;
+							coefB[1] = coefB[0] + N;
+							coefB[2] = coefB[1] + N;
+							coefB[3] = coefB[2] + N;
+							coefB[4] = coefB[3] + N;
+							coefB[5] = coefB[4] + N;
+							coefB[6] = coefB[5] + N;
+							coefB[7] = coefB[6] + N;
+							sum[0][0] += A[coefA[0]] * Bt[coefB[0]];
+							sum[0][1] += A[coefA[0]] * Bt[coefB[1]];
+							sum[0][2] += A[coefA[0]] * Bt[coefB[2]];
+							sum[0][3] += A[coefA[0]] * Bt[coefB[3]];
+							sum[0][4] += A[coefA[0]] * Bt[coefB[4]];
+							sum[0][5] += A[coefA[0]] * Bt[coefB[5]];
+							sum[0][6] += A[coefA[0]] * Bt[coefB[6]];
+							sum[0][7] += A[coefA[0]] * Bt[coefB[7]];
+							sum[1][0] += A[coefA[1]] * Bt[coefB[0]];
+							sum[1][1] += A[coefA[1]] * Bt[coefB[1]];
+							sum[1][2] += A[coefA[1]] * Bt[coefB[2]];
+							sum[1][3] += A[coefA[1]] * Bt[coefB[3]];
+							sum[1][4] += A[coefA[1]] * Bt[coefB[4]];
+							sum[1][5] += A[coefA[1]] * Bt[coefB[5]];
+							sum[1][6] += A[coefA[1]] * Bt[coefB[6]];
+							sum[1][7] += A[coefA[1]] * Bt[coefB[7]];
+							sum[2][0] += A[coefA[2]] * Bt[coefB[0]];
+							sum[2][1] += A[coefA[2]] * Bt[coefB[1]];
+							sum[2][2] += A[coefA[2]] * Bt[coefB[2]];
+							sum[2][3] += A[coefA[2]] * Bt[coefB[3]];
+							sum[2][4] += A[coefA[2]] * Bt[coefB[4]];
+							sum[2][5] += A[coefA[2]] * Bt[coefB[5]];
+							sum[2][6] += A[coefA[2]] * Bt[coefB[6]];
+							sum[2][7] += A[coefA[2]] * Bt[coefB[7]];
+							sum[3][0] += A[coefA[3]] * Bt[coefB[0]];
+							sum[3][1] += A[coefA[3]] * Bt[coefB[1]];
+							sum[3][2] += A[coefA[3]] * Bt[coefB[2]];
+							sum[3][3] += A[coefA[3]] * Bt[coefB[3]];
+							sum[3][4] += A[coefA[3]] * Bt[coefB[4]];
+							sum[3][5] += A[coefA[3]] * Bt[coefB[5]];
+							sum[3][6] += A[coefA[3]] * Bt[coefB[6]];
+							sum[3][7] += A[coefA[3]] * Bt[coefB[7]];
+							sum[4][0] += A[coefA[4]] * Bt[coefB[0]];
+							sum[4][1] += A[coefA[4]] * Bt[coefB[1]];
+							sum[4][2] += A[coefA[4]] * Bt[coefB[2]];
+							sum[4][3] += A[coefA[4]] * Bt[coefB[3]];
+							sum[4][4] += A[coefA[4]] * Bt[coefB[4]];
+							sum[4][5] += A[coefA[4]] * Bt[coefB[5]];
+							sum[4][6] += A[coefA[4]] * Bt[coefB[6]];
+							sum[4][7] += A[coefA[4]] * Bt[coefB[7]];
+							sum[5][0] += A[coefA[5]] * Bt[coefB[0]];
+							sum[5][1] += A[coefA[5]] * Bt[coefB[1]];
+							sum[5][2] += A[coefA[5]] * Bt[coefB[2]];
+							sum[5][3] += A[coefA[5]] * Bt[coefB[3]];
+							sum[5][4] += A[coefA[5]] * Bt[coefB[4]];
+							sum[5][5] += A[coefA[5]] * Bt[coefB[5]];
+							sum[5][6] += A[coefA[5]] * Bt[coefB[6]];
+							sum[5][7] += A[coefA[5]] * Bt[coefB[7]];
+							sum[6][0] += A[coefA[6]] * Bt[coefB[0]];
+							sum[6][1] += A[coefA[6]] * Bt[coefB[1]];
+							sum[6][2] += A[coefA[6]] * Bt[coefB[2]];
+							sum[6][3] += A[coefA[6]] * Bt[coefB[3]];
+							sum[6][4] += A[coefA[6]] * Bt[coefB[4]];
+							sum[6][5] += A[coefA[6]] * Bt[coefB[5]];
+							sum[6][6] += A[coefA[6]] * Bt[coefB[6]];
+							sum[6][7] += A[coefA[6]] * Bt[coefB[7]];
+							sum[7][0] += A[coefA[7]] * Bt[coefB[0]];
+							sum[7][1] += A[coefA[7]] * Bt[coefB[1]];
+							sum[7][2] += A[coefA[7]] * Bt[coefB[2]];
+							sum[7][3] += A[coefA[7]] * Bt[coefB[3]];
+							sum[7][4] += A[coefA[7]] * Bt[coefB[4]];
+							sum[7][5] += A[coefA[7]] * Bt[coefB[5]];
+							sum[7][6] += A[coefA[7]] * Bt[coefB[6]];
+							sum[7][7] += A[coefA[7]] * Bt[coefB[7]];
+						}
+					coefC[0][0] = i*BLOCK_SIZE*N + j * BLOCK_SIZE + k*N + m;
+					C[coefC[0][0]] = sum[0][0];
+					coefC[0][1] = coefC[0][0] + 1;
+					C[coefC[0][1]] = sum[0][1];
+					coefC[0][2] = coefC[0][1] + 1;
+					C[coefC[0][2]] = sum[0][2];
+					coefC[0][3] = coefC[0][2] + 1;
+					C[coefC[0][3]] = sum[0][3];
+					coefC[0][4] = coefC[0][3] + 1;
+					C[coefC[0][4]] = sum[0][4];
+					coefC[0][5] = coefC[0][4] + 1;
+					C[coefC[0][5]] = sum[0][5];
+					coefC[0][6] = coefC[0][5] + 1;
+					C[coefC[0][6]] = sum[0][6];
+					coefC[0][7] = coefC[0][6] + 1;
+					C[coefC[0][7]] = sum[0][7];
+					coefC[1][0] = coefC[0][0] + N;
+					C[coefC[1][0]] = sum[1][0];
+					coefC[1][1] = coefC[1][0] + 1;
+					C[coefC[1][1]] = sum[1][1];
+					coefC[1][2] = coefC[1][1] + 1;
+					C[coefC[1][2]] = sum[1][2];
+					coefC[1][3] = coefC[1][2] + 1;
+					C[coefC[1][3]] = sum[1][3];
+					coefC[1][4] = coefC[1][3] + 1;
+					C[coefC[1][4]] = sum[1][4];
+					coefC[1][5] = coefC[1][4] + 1;
+					C[coefC[1][5]] = sum[1][5];
+					coefC[1][6] = coefC[1][5] + 1;
+					C[coefC[1][6]] = sum[1][6];
+					coefC[1][7] = coefC[1][6] + 1;
+					C[coefC[1][7]] = sum[1][7];
+					coefC[2][0] = coefC[1][0] + N;
+					C[coefC[2][0]] = sum[2][0];
+					coefC[2][1] = coefC[2][0] + 1;
+					C[coefC[2][1]] = sum[2][1];
+					coefC[2][2] = coefC[2][1] + 1;
+					C[coefC[2][2]] = sum[2][2];
+					coefC[2][3] = coefC[2][2] + 1;
+					C[coefC[2][3]] = sum[2][3];
+					coefC[2][4] = coefC[2][3] + 1;
+					C[coefC[2][4]] = sum[2][4];
+					coefC[2][5] = coefC[2][4] + 1;
+					C[coefC[2][5]] = sum[2][5];
+					coefC[2][6] = coefC[2][5] + 1;
+					C[coefC[2][6]] = sum[2][6];
+					coefC[2][7] = coefC[2][6] + 1;
+					C[coefC[2][7]] = sum[2][7];
+					coefC[3][0] = coefC[2][0] + N;
+					C[coefC[3][0]] = sum[3][0];
+					coefC[3][1] = coefC[3][0] + 1;
+					C[coefC[3][1]] = sum[3][1];
+					coefC[3][2] = coefC[3][1] + 1;
+					C[coefC[3][2]] = sum[3][2];
+					coefC[3][3] = coefC[3][2] + 1;
+					C[coefC[3][3]] = sum[3][3];
+					coefC[3][4] = coefC[3][3] + 1;
+					C[coefC[3][4]] = sum[3][4];
+					coefC[3][5] = coefC[3][4] + 1;
+					C[coefC[3][5]] = sum[3][5];
+					coefC[3][6] = coefC[3][5] + 1;
+					C[coefC[3][6]] = sum[3][6];
+					coefC[3][7] = coefC[3][6] + 1;
+					C[coefC[3][7]] = sum[3][7];
+					coefC[4][0] = coefC[3][0] + N;
+					C[coefC[4][0]] = sum[4][0];
+					coefC[4][1] = coefC[4][0] + 1;
+					C[coefC[4][1]] = sum[4][1];
+					coefC[4][2] = coefC[4][1] + 1;
+					C[coefC[4][2]] = sum[4][2];
+					coefC[4][3] = coefC[4][2] + 1;
+					C[coefC[4][3]] = sum[4][3];
+					coefC[4][4] = coefC[4][3] + 1;
+					C[coefC[4][4]] = sum[4][4];
+					coefC[4][5] = coefC[4][4] + 1;
+					C[coefC[4][5]] = sum[4][5];
+					coefC[4][6] = coefC[4][5] + 1;
+					C[coefC[4][6]] = sum[4][6];
+					coefC[4][7] = coefC[4][6] + 1;
+					C[coefC[4][7]] = sum[4][7];
+					coefC[5][0] = coefC[4][0] + N;
+					C[coefC[5][0]] = sum[5][0];
+					coefC[5][1] = coefC[5][0] + 1;
+					C[coefC[5][1]] = sum[5][1];
+					coefC[5][2] = coefC[5][1] + 1;
+					C[coefC[5][2]] = sum[5][2];
+					coefC[5][3] = coefC[5][2] + 1;
+					C[coefC[5][3]] = sum[5][3];
+					coefC[5][4] = coefC[5][3] + 1;
+					C[coefC[5][4]] = sum[5][4];
+					coefC[5][5] = coefC[5][4] + 1;
+					C[coefC[5][5]] = sum[5][5];
+					coefC[5][6] = coefC[5][5] + 1;
+					C[coefC[5][6]] = sum[5][6];
+					coefC[5][7] = coefC[5][6] + 1;
+					C[coefC[5][7]] = sum[5][7];
+					coefC[6][0] = coefC[5][0] + N;
+					C[coefC[6][0]] = sum[6][0];
+					coefC[6][1] = coefC[6][0] + 1;
+					C[coefC[6][1]] = sum[6][1];
+					coefC[6][2] = coefC[6][1] + 1;
+					C[coefC[6][2]] = sum[6][2];
+					coefC[6][3] = coefC[6][2] + 1;
+					C[coefC[6][3]] = sum[6][3];
+					coefC[6][4] = coefC[6][3] + 1;
+					C[coefC[6][4]] = sum[6][4];
+					coefC[6][5] = coefC[6][4] + 1;
+					C[coefC[6][5]] = sum[6][5];
+					coefC[6][6] = coefC[6][5] + 1;
+					C[coefC[6][6]] = sum[6][6];
+					coefC[6][7] = coefC[6][6] + 1;
+					C[coefC[6][7]] = sum[6][7];
+					coefC[7][0] = coefC[6][0] + N;
+					C[coefC[7][0]] = sum[7][0];
+					coefC[7][1] = coefC[7][0] + 1;
+					C[coefC[7][1]] = sum[7][1];
+					coefC[7][2] = coefC[7][1] + 1;
+					C[coefC[7][2]] = sum[7][2];
+					coefC[7][3] = coefC[7][2] + 1;
+					C[coefC[7][3]] = sum[7][3];
+					coefC[7][4] = coefC[7][3] + 1;
+					C[coefC[7][4]] = sum[7][4];
+					coefC[7][5] = coefC[7][4] + 1;
+					C[coefC[7][5]] = sum[7][5];
+					coefC[7][6] = coefC[7][5] + 1;
+					C[coefC[7][6]] = sum[7][6];
+					coefC[7][7] = coefC[7][6] + 1;
+					C[coefC[7][7]] = sum[7][7];
+
+				}
+}
+
+double* my_solver(int N, double *A, double* B) {
+	double *At = malloc ( N * N * sizeof(double));  
+	double *Bt = malloc ( N * N * sizeof(double));  
+	int i,j;
+	for(i = 0; i < N; i++)
+		for(j = 0; j < N; j++){
+			At[i * N + j] = A[j * N + i];
+			Bt[i * N + j] = B[j * N + i];
+		}
+	double *C = calloc (N * N, sizeof(double));
+	double *Ct = calloc (N * N, sizeof(double));
+	double *C_2 = calloc (N * N, sizeof(double));
+
+	betaMult(N, At, Bt, C);
+
+	for(i = 0; i < N; i++)
+		for(j = 0; j < N; j++){
+			if(i > j) {
+				C[i * N + j] = 0;
+			}
+			else {
+				C[i * N + j] += C[j * N + i];
+			}
+		}
+
+	for(i = 0; i < N; i++)
+		for(j = 0; j < N; j++){
+			Ct[i * N + j] = C[j * N + i];
+		}
+	betaMult2(N, C, Ct, C_2);
+	free(At);
+	free(Bt);
+	free(Ct);
+	free(C);
+	return C_2;
+}
+
