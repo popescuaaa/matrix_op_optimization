@@ -81,6 +81,15 @@ double *my_solver(int N, double *A, double *B)
 		B_At,
 		N);
 
+	for (li = 0; li < N; li++)
+	{
+		for (ci = 0; ci < N; ci++)
+		{
+			printf("%lf ", B_At[li * N + ci]);
+		}
+		printf("\n");
+	}
+
 	/* A2 */
 	cblas_dgemm(
 		CblasRowMajor,
@@ -97,6 +106,7 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		A2,
 		N);
+
 	for (li = 0; li < N; li++)
 	{
 		for (ci = 0; ci < N; ci++)
@@ -105,6 +115,7 @@ double *my_solver(int N, double *A, double *B)
 		}
 		printf("\n");
 	}
+
 	/* A2 * B */
 	cblas_dgemm(
 		CblasRowMajor,
@@ -121,6 +132,16 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		A2_B,
 		N);
+
+	for (li = 0; li < N; li++)
+	{
+		for (ci = 0; ci < N; ci++)
+		{
+			printf("%lf ", A2_B[li * N + ci]);
+		}
+		printf("\n");
+	}
+
 
 	for (li = 0; li < N; li++)
 	{
