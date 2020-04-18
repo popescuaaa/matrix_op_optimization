@@ -80,11 +80,11 @@ double* optimal_solver(int N, double *A, double* B) {
         register double lhs_sum = 0.0;
         register double rhs_sum = 0.0;
 
-        double* p_B_1 = p_B_orig;
-        double* p_A2 = p_A2_orig;
+        register double* p_B_1 = p_B_orig;
+        register double* p_A2 = p_A2_orig;
 
-        double* p_At = &At[ci];
-        double* p_B_2 = &B[ci];
+        register double* p_At = &At[ci];
+        register double* p_B_2 = &B[ci];
 
 	    for (hi = 0; hi < N; hi++) {
 			/* B * At */
