@@ -38,6 +38,16 @@ double *my_solver(int N, double *A, double *B)
 	 * 		n);
 	 * 
 	 **/
+	
+
+	
+	double *B_At;
+	double *A2;
+	double *A2_B;
+	double *R;
+	size_t li;
+	size_t ci;
+
 	printf("\n======A====\n");
 	for (li = 0; li < N; li++)
 	{
@@ -58,15 +68,7 @@ double *my_solver(int N, double *A, double *B)
 		}
 		printf("\n");
 	}
-
 	
-	double *B_At;
-	double *A2;
-	double *A2_B;
-	double *R;
-	size_t li;
-	size_t ci;
-
 	B_At = (double *)calloc(N * N, sizeof(double));
 	if (B_At == NULL)
 		exit(BAD_ALLOC);
