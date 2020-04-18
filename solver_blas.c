@@ -43,19 +43,19 @@ double* my_solver(int N, double *A, double *B) {
 	size_t li;
 	size_t ci;
 	
-	B_At = (double *) calloc(N * N, sizeof(double)));
+	B_At = (double *) calloc(N * N, sizeof(double));
 	if (B_At == NULL)
 		exit(BAD_ALLOC);
 
-	A2 = (double *) calloc(N * N, sizeof(double)));
+	A2 = (double *) calloc(N * N, sizeof(double));
 	if (A2 == NULL)
 		exit(BAD_ALLOC);
 
-	A2_B = (double *) calloc(N * N, sizeof(double)));
+	A2_B = (double *) calloc(N * N, sizeof(double));
 	if (A2_B == NULL)
 		exit(BAD_ALLOC);
 
-	R = (double *) calloc(N * N, sizeof(double)));
+	R = (double *) calloc(N * N, sizeof(double));
 	if (R == NULL)
 		exit(BAD_ALLOC);
 
