@@ -38,6 +38,28 @@ double *my_solver(int N, double *A, double *B)
 	 * 		n);
 	 * 
 	 **/
+	printf("\n======A====\n");
+	for (li = 0; li < N; li++)
+	{
+		for (ci = 0; ci < N; ci++)
+		{
+			printf("%lf ", A[li * N + ci]);
+		}
+		printf("\n");
+	}
+
+	printf("\n====B======\n");
+
+	for (li = 0; li < N; li++)
+	{
+		for (ci = 0; ci < N; ci++)
+		{
+			printf("%lf ", B[li * N + ci]);
+		}
+		printf("\n");
+	}
+
+	
 	double *B_At;
 	double *A2;
 	double *A2_B;
@@ -80,7 +102,7 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		B_At,
 		N);
-
+	printf("\n=====B_At=====\n");
 	for (li = 0; li < N; li++)
 	{
 		for (ci = 0; ci < N; ci++)
@@ -106,7 +128,7 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		A2,
 		N);
-
+	printf("\n====A2======\n");
 	for (li = 0; li < N; li++)
 	{
 		for (ci = 0; ci < N; ci++)
@@ -132,7 +154,7 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		A2_B,
 		N);
-
+	printf("\n=====A2_B=====\n");
 	for (li = 0; li < N; li++)
 	{
 		for (ci = 0; ci < N; ci++)
