@@ -77,6 +77,7 @@ double* nonoptimal_solver(int N, double *A, double *B)
 	    for (hi = 0; hi < N; hi++) {
 			/* B * At */
             LHS[li * N + ci] += B[li * N + hi] * At[hi * N + ci];
+            /* A2 * B */
 			RHS[li * N + ci] += A2[li * N + hi] * B[hi * N + ci];
         }
 		LHS[li * N + ci] += RHS[li * N + ci];
