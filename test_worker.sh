@@ -19,8 +19,9 @@ chmod 777 ./tema2_opt_m
 
 echo "Testing blas API method..."
 # Test blas flavour
+echo "--------------------------------" >> logile
 ./tema2_blas input &>> logile
-
+echo "--------------------------------" >> logile
 #------------------- Crectness -------------------------
 ./compare out1 /export/asc/tema2/out1 0.01
 ./compare out2 /export/asc/tema2/out2 0.01
@@ -30,7 +31,9 @@ echo "Testing blas API method..."
 #
 echo "Testing neoptimal method..."
 # Test neopt flavour
+echo "--------------------------------" >> logile
 ./tema2_neopt input &>> logile
+echo "--------------------------------" >> logile
 
 #------------------- Crectness -------------------------
 ./compare out1 /export/asc/tema2/out1 0.01
@@ -41,7 +44,9 @@ echo "Testing neoptimal method..."
 #
 echo "Testing optimal <<m>> method..."
 # Test opt_m flavour
+echo "--------------------------------" >> logile
 ./tema2_opt_m input &>> logile
+echo "--------------------------------" >> logile
 
 #------------------- Crectness -------------------------
 ./compare out1 /export/asc/tema2/out1 0.01
@@ -52,7 +57,9 @@ echo "Testing optimal <<m>> method..."
 #
 echo "Testing optimal <<f>> method..."
 # Test opt_m flavour
-./tema2_opt_f input &>> logile
+echo "--------------------------------" >> logfile
+./tema2_opt_f input &>> logile 
+echo "--------------------------------" >> logfile
 
 #------------------- Crectness -------------------------
 ./compare out1 /export/asc/tema2/out1 0.01
@@ -63,7 +70,9 @@ echo "Testing optimal <<f>> method..."
 #
 echo "Testing optimal <<f_extra>> method..."
 # Test opt_m flavour
+echo "--------------------------------" >> logfile
 ./tema2_opt_f_extra input &>> logile
+echo "--------------------------------" >> logfile
 
 #------------------- Crectness -------------------------
 ./compare out1 /export/asc/tema2/out1 0.01
