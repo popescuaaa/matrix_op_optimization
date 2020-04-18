@@ -80,20 +80,21 @@ double* optimal_solver(int N, double *A, double* B) {
         double *p_At = p_At_orig;
         double *p_A2 = p_A2_orig;
 
-        double *p_B = &B[ci];
-        
+        double *p_B_1 = &B[ci];
+        double *p_B_2 = &B[ci];
+
 	    for (hi = 0; hi < N; hi++) {
 			/* B * At */
-            lhs_sum += *p_B * *p_At;
+            lhs_sum += *p_B_1 * *p_At;
 
             /* A2 * B */
-			rhs_sum += *p_A2 * *p_B;
-
+			rhs_sum += *p_A2 * *p_B_2;
+            
+            p_B_2++;
             p_At++;
-            p_A2++;
-
-            p_B += N;
-
+           
+            p_A2 += N;
+            p_B_1 += N;
         }
 
 		LHS[li * N + ci] = lhs_sum;
