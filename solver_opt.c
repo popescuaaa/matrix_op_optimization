@@ -90,6 +90,6 @@ double* optimal_solver(int N, double *A, double* B) {
 double* my_solver(int N, double *A, double* B) 
 {
 	/* Computing the main parameters used for computation */ 
-	double* R = nonoptimal_solver(N, A, B);
+	double* R = optimal_solver(N, A, B);
 	return R;	
 }
