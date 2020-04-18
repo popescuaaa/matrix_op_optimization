@@ -48,27 +48,6 @@ double *my_solver(int N, double *A, double *B)
 	size_t li;
 	size_t ci;
 
-	printf("\n======A====\n");
-	for (li = 0; li < N; li++)
-	{
-		for (ci = 0; ci < N; ci++)
-		{
-			printf("%lf ", A[li * N + ci]);
-		}
-		printf("\n");
-	}
-
-	printf("\n====B======\n");
-
-	for (li = 0; li < N; li++)
-	{
-		for (ci = 0; ci < N; ci++)
-		{
-			printf("%lf ", B[li * N + ci]);
-		}
-		printf("\n");
-	}
-	
 	B_At = (double *)calloc(N * N, sizeof(double));
 	if (B_At == NULL)
 		exit(BAD_ALLOC);
@@ -104,15 +83,7 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		B_At,
 		N);
-	printf("\n=====B_At=====\n");
-	for (li = 0; li < N; li++)
-	{
-		for (ci = 0; ci < N; ci++)
-		{
-			printf("%lf ", B_At[li * N + ci]);
-		}
-		printf("\n");
-	}
+
 
 	/* A2 */
 	cblas_dgemm(
@@ -130,21 +101,12 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		A2,
 		N);
-	printf("\n====A2======\n");
-	for (li = 0; li < N; li++)
-	{
-		for (ci = 0; ci < N; ci++)
-		{
-			printf("%lf ", A2[li * N + ci]);
-		}
-		printf("\n");
-	}
 
 	/* A2 * B */
 	cblas_dgemm(
 		CblasRowMajor,
 		CblasNoTrans,
-		CblasTrans,
+		CblasNoTrans,
 		N,
 		N,
 		N,
@@ -156,17 +118,7 @@ double *my_solver(int N, double *A, double *B)
 		beta,
 		A2_B,
 		N);
-	printf("\n=====A2_B=====\n");
-	for (li = 0; li < N; li++)
-	{
-		for (ci = 0; ci < N; ci++)
-		{
-			printf("%lf ", A2_B[li * N + ci]);
-		}
-		printf("\n");
-	}
-
-
+	
 	for (li = 0; li < N; li++)
 	{
 		for (ci = 0; ci < N; ci++)
