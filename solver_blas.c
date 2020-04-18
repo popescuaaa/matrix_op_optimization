@@ -10,7 +10,8 @@
 /* 
  * Add your BLAS implementation here
  */
-double* my_solver(int N, double *A, double *B) {
+double *my_solver(int N, double *A, double *B)
+{
 	/* Computing the main parameters used for computation */
 
 	/* First element of the computation using BLAS */
@@ -35,27 +36,28 @@ double* my_solver(int N, double *A, double *B) {
 	 * 		beta, 
 	 * 		C,
 	 * 		n);
-	 **/ 
-	double* B_At;
-	double* A2;
-	double* A2_B;
-	double* R;
+	 * 
+	 **/
+	double *B_At;
+	double *A2;
+	double *A2_B;
+	double *R;
 	size_t li;
 	size_t ci;
-	
-	B_At = (double *) calloc(N * N, sizeof(double));
+
+	B_At = (double *)calloc(N * N, sizeof(double));
 	if (B_At == NULL)
 		exit(BAD_ALLOC);
 
-	A2 = (double *) calloc(N * N, sizeof(double));
+	A2 = (double *)calloc(N * N, sizeof(double));
 	if (A2 == NULL)
 		exit(BAD_ALLOC);
 
-	A2_B = (double *) calloc(N * N, sizeof(double));
+	A2_B = (double *)calloc(N * N, sizeof(double));
 	if (A2_B == NULL)
 		exit(BAD_ALLOC);
 
-	R = (double *) calloc(N * N, sizeof(double));
+	R = (double *)calloc(N * N, sizeof(double));
 	if (R == NULL)
 		exit(BAD_ALLOC);
 
@@ -67,57 +69,63 @@ double* my_solver(int N, double *A, double *B) {
 		CblasRowMajor,
 		CblasNoTrans,
 		CblasTrans,
-		N, 
 		N,
-		N,  
-		alpha, 
-		B, 
 		N,
-		A, 
 		N,
-		beta, 
-		B_At, 
-		N
-	);
+		alpha,
+		B,
+		N,
+		A,
+		N,
+		beta,
+		B_At,
+		N);
 
 	/* A2 */
 	cblas_dgemm(
 		CblasRowMajor,
 		CblasNoTrans,
 		CblasNoTrans,
-		N, 
 		N,
-		N,  
-		alpha, 
-		A, 
 		N,
-		A, 
 		N,
-		beta, 
+		alpha,
+		A,
+		N,
+		A,
+		N,
+		beta,
 		A2,
-		N
-	);
-
+		N);
+	for (li = 0; li < N; li++)
+	{
+		for (ci = 0; ci < N; ci++)
+		{
+			printf("%lf ", A2[li * N + ci]);
+		}
+		printf("\n");
+	}
 	/* A2 * B */
 	cblas_dgemm(
 		CblasRowMajor,
 		CblasNoTrans,
 		CblasTrans,
-		N, 
 		N,
-		N,  
-		alpha, 
-		A2, 
 		N,
-		B, 
 		N,
-		beta, 
-		A2_B, 
-		N
-	);
-	
-	for (li = 0; li < N; li++) {
-		for (ci = 0; ci < N; ci++) {
+		alpha,
+		A2,
+		N,
+		B,
+		N,
+		beta,
+		A2_B,
+		N);
+
+	for (li = 0; li < N; li++)
+	{
+		for (ci = 0; ci < N; ci++)
+		{
 			R[li * N + ci] = B_At[li * N + ci] + A2_B[li * N + ci];
 		}
 	}
