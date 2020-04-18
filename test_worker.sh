@@ -17,6 +17,7 @@ chmod 777 ./tema2_blas
 chmod 777 ./tema2_neopt
 chmod 777 ./tema2_opt_m
 
+echo "Testing blas API method..."
 # Test blas flavour
 ./tema2_blas input &> blas.out
 
@@ -27,6 +28,7 @@ chmod 777 ./tema2_opt_m
 
 # ------------- Execution for NEOPT --------------------
 #
+echo "Testing neoptimal method..."
 # Test neopt flavour
 ./tema2_neopt input &> neopt.out
 
@@ -37,6 +39,7 @@ chmod 777 ./tema2_opt_m
 
 # ------------- Execution for OPT_M --------------------
 #
+echo "Testing optimal <<m>> method..."
 # Test opt_m flavour
 ./tema2_opt_m input &> opt_m.out
 
@@ -47,6 +50,7 @@ chmod 777 ./tema2_opt_m
 
 # ------------- Execution for OPT_F --------------------
 #
+echo "Testing optimal <<f>> method..."
 # Test opt_m flavour
 ./tema2_opt_f input &> opt_f.out
 
@@ -57,6 +61,7 @@ chmod 777 ./tema2_opt_m
 
 # ------------- Execution for OPT_F_EXTRA --------------
 #
+echo "Testing optimal <<f_extra>> method..."
 # Test opt_m flavour
 ./tema2_opt_f_extra input &> opt_f_extra.out
 
