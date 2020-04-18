@@ -57,31 +57,34 @@ double* optimal_solver(int N, double *A, double* B) {
     if (RHS == NULL)
         exit(BAD_ALLOC);
 
+
 	for (li = 0; li < N; li++) {
       for (ci = 0; ci < N; ci++) {
-		  A2[li * N + ci] = 0.0;
+		  double register sum = 0.0;
 	    for (hi = 0; hi < N; hi++) {
 			/* A * A */
-			A2[li * N + ci] += A[li * N + hi] * A[hi * N + ci];
+			sum += A[li * N + hi] * A[hi * N + ci];
         }
+        A2[li * N + ci] = sum;
       }
     }
 
+
     for (li = 0; li < N; li++) {
 
-		double *p_A2_orig = &A2[li * N];
-        double *p_B_orig = &B[li * N];
+		double* p_A2_orig = &A2[li * N];
+        double* p_B_orig = &B[li * N];
 
       for (ci = 0; ci < N; ci++) {
 
         register double lhs_sum = 0.0;
         register double rhs_sum = 0.0;
 
-        double *p_B_1 = p_B_orig;
-        double *p_A2 = p_A2_orig;
+        double* p_B_1 = p_B_orig;
+        double* p_A2 = p_A2_orig;
 
-        double *p_At = &At[ci];
-        double *p_B_2 = &B[ci];
+        double* p_At = &At[ci];
+        double* p_B_2 = &B[ci];
 
 	    for (hi = 0; hi < N; hi++) {
 			/* B * At */
@@ -90,11 +93,11 @@ double* optimal_solver(int N, double *A, double* B) {
             /* A2 * B */
 			rhs_sum += *p_A2 * *p_B_2;
             
-            p_B_2++;
-            p_At++;
+            p_B_1++;
+            p_A2++;
            
-            p_A2 += N;
-            p_B_1 += N;
+            p_At += N;
+            p_B_2 += N;
         }
 
 		LHS[li * N + ci] = lhs_sum;
