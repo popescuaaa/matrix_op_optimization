@@ -69,18 +69,18 @@ double* optimal_solver(int N, double *A, double* B) {
 
     for (li = 0; li < N; li++) {
 
-        double *p_At_orig = &At[li * N];
 		double *p_A2_orig = &A2[li * N];
-        
+        double *p_B_orig = &B[li * N];
+
       for (ci = 0; ci < N; ci++) {
 
         register double lhs_sum = 0.0;
         register double rhs_sum = 0.0;
 
-        double *p_At = p_At_orig;
+        double *p_B_1 = p_B_orig;
         double *p_A2 = p_A2_orig;
 
-        double *p_B_1 = &B[ci];
+        double *p_At = &At[ci];
         double *p_B_2 = &B[ci];
 
 	    for (hi = 0; hi < N; hi++) {
