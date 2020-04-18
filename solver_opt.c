@@ -38,7 +38,8 @@ double* transpose(int N, double *M)
  * 
  **/ 
 double* optimal_solver(int N, double *A, double* B) {
-	size_t li;
+	
+    size_t li;
     size_t ci;
     size_t hi;
 
@@ -67,15 +68,37 @@ double* optimal_solver(int N, double *A, double* B) {
     }
 
     for (li = 0; li < N; li++) {
+
+        double *p_At_orig = &At[li * N];
+		double *p_A2_orig = &A2[li * N];
+        
       for (ci = 0; ci < N; ci++) {
-        LHS[li * N + ci] = 0.0;
-		RHS[li * N + ci] = 0.0;
+
+        register double lhs_sum = 0.0;
+        register double rhs_sum = 0.0;
+
+        double *p_At = p_At_orig;
+        double *p_A2 = p_A2_orig;
+
+        double *p_B = &B[ci];
+        
 	    for (hi = 0; hi < N; hi++) {
 			/* B * At */
-            LHS[li * N + ci] += B[li * N + hi] * At[hi * N + ci];
-			RHS[li * N + ci] += A2[li * N + hi] * B[hi * N + ci];
+            lhs_sum += *p_B * *p_At;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B;
+
+            p_At++;
+            p_A2++;
+
+            p_B += N;
+
         }
-		LHS[li * N + ci] += RHS[li * N + ci];
+
+		LHS[li * N + ci] = lhs_sum;
+        RHS[li * N + ci] = rhs_sum;
+        LHS[li * N + ci] += RHS[li * N + ci];
       }
     }
     
