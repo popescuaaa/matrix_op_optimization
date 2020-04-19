@@ -52,9 +52,129 @@ double* optimal_solver(int N, double *A, double* B) {
           At[li * N + ci] = A[ci * N + li];
 		  double register sum = 0.0;
 
-	    for (hi = 0; hi < N; hi += 10) {
+	    for (hi = 0; hi < N; hi += BLOCK) {
 			/* A * A */
 			sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
             p_A++;
             p_A_s += N;
 
