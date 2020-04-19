@@ -123,3 +123,6 @@ Run=./tema2_opt_m: N=1200: Time=23.018751
 Run=./tema2_opt_f: N=400: Time=0.892642
 Run=./tema2_opt_f: N=800: Time=4.368647
 Run=./tema2_opt_f: N=1200: Time=13.382110
+Run=./tema2_opt_f_extra: N=400: Time=0.879637
+Run=./tema2_opt_f_extra: N=800: Time=4.392120
+Run=./tema2_opt_f_extra: N=1200: Time=13.615879
