@@ -6,29 +6,6 @@
 #define BAD_ALLOC 12
 
 /**
- * @param: N: int - the number of elements per column / line
- * @param: M: double* - the matrix stored as a vector N * N 
- * @return: The transpose of a matrix
- * 
- **/ 
-double* transpose(int N, double *M) 
-{   
-    size_t li;
-    size_t ci;
-    double *T = (double*) malloc(N * N * sizeof(double));
-    if (T == NULL)
-        exit(BAD_ALLOC);
-
-    for (li = 0; li < N; li++) {
-        for (ci = 0; ci < N; ci++) {
-            T[li * N + ci] = M[ci * N + li];
-        }
-    }
-    
-    return T;
-}
-
-/**
  * Optimal version of the matrix multiplication algorithm 
  * 
  * @param: N: int the number of elements per line/column in each matrix
@@ -60,16 +37,21 @@ double* optimal_solver(int N, double *A, double* B) {
         exit(BAD_ALLOC);
 
 
-    /* Separately calculte the A * A matrix as A2 */ 
+    /**
+     * Separately calculte the A * A matrix as A2 
+     * and the transpose O(N3)
+     * */ 
 
 	for (li = 0; li < N; li++) {
         register double* p_A_orig = &A[li * N];
 
       for (ci = 0; ci < N; ci++) {
+
           register double* p_A = p_A_orig;
           register double* p_A_s = &A[ci];
           At[li * N + ci] = A[ci * N + li];
 		  double register sum = 0.0;
+
 	    for (hi = 0; hi < N; hi++) {
 			/* A * A */
 			sum += *p_A * *p_A_s;
@@ -81,7 +63,10 @@ double* optimal_solver(int N, double *A, double* B) {
       }
     }
 
-
+    /**
+     * 
+     *  O(N3)
+     **/ 
     for (li = 0; li < N; li++) {
 
 		double* p_A2_orig = &A2[li * N];
