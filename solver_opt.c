@@ -43,7 +43,9 @@ double* optimal_solver(int N, double *A, double* B) {
     size_t ci;
     size_t hi;
 
-	double* At = transpose(N, A);
+	double* At = (double *) malloc(N * N * sizeof(double));
+    if (At == NULL)
+        exit(BAD_ALLOC);;
 
 	double* A2 = (double *) malloc(N * N * sizeof(double));
     if (A2 == NULL)
@@ -58,13 +60,15 @@ double* optimal_solver(int N, double *A, double* B) {
         exit(BAD_ALLOC);
 
 
+    /* Separately calculte the A * A matrix as A2 */ 
+
 	for (li = 0; li < N; li++) {
         register double* p_A_orig = &A[li * N];
 
       for (ci = 0; ci < N; ci++) {
           register double* p_A = p_A_orig;
           register double* p_A_s = &A[ci];
-
+          At[li * N + ci] = A[ci * N + li];
 		  double register sum = 0.0;
 	    for (hi = 0; hi < N; hi++) {
 			/* A * A */
