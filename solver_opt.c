@@ -4,7 +4,7 @@
  */
 #include "utils.h"
 #define BAD_ALLOC 12
-
+#define BLOCK 40
 /**
  * Optimal version of the matrix multiplication algorithm 
  * 
@@ -41,7 +41,7 @@ double* optimal_solver(int N, double *A, double* B) {
      * Separately calculte the A * A matrix as A2 
      * and the transpose O(N3)
      * */ 
-
+    /* Loop unrolling */
 	for (li = 0; li < N; li++) {
         register double* p_A_orig = &A[li * N];
 
@@ -52,12 +52,48 @@ double* optimal_solver(int N, double *A, double* B) {
           At[li * N + ci] = A[ci * N + li];
 		  double register sum = 0.0;
 
-	    for (hi = 0; hi < N; hi++) {
+	    for (hi = 0; hi < N; hi += 10) {
 			/* A * A */
 			sum += *p_A * *p_A_s;
-            
             p_A++;
             p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
+            sum += *p_A * *p_A_s;
+            p_A++;
+            p_A_s += N;
+
         }
         A2[li * N + ci] = sum;
       }
