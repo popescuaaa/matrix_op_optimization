@@ -22,7 +22,7 @@ double* optimal_solver(int N, double *A, double* B) {
 
 	double* At = (double *) malloc(N * N * sizeof(double));
     if (At == NULL)
-        exit(BAD_ALLOC);;
+        exit(BAD_ALLOC);
 
 	double* A2 = (double *) malloc(N * N * sizeof(double));
     if (A2 == NULL)
