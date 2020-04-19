@@ -59,11 +59,19 @@ double* optimal_solver(int N, double *A, double* B) {
 
 
 	for (li = 0; li < N; li++) {
+        register double* p_A_orig = &A[li * N];
+
       for (ci = 0; ci < N; ci++) {
+          register double* p_A = p_A_orig;
+          register double* p_A_s = &A[ci];
+
 		  double register sum = 0.0;
 	    for (hi = 0; hi < N; hi++) {
 			/* A * A */
-			sum += A[li * N + hi] * A[hi * N + ci];
+			sum += *p_A * *p_A_s;
+            
+            p_A++;
+            p_A_s += N;
         }
         A2[li * N + ci] = sum;
       }
