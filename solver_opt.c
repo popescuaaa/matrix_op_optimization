@@ -239,18 +239,406 @@ double* optimal_solver(int N, double *A, double* B) {
         register double* p_At = &At[ci];
         register double* p_B_2 = &B[ci];
 
-	    for (hi = 0; hi < N; hi++) {
+	    for (hi = 0; hi < N; hi += BLOCK) {
 			/* B * At */
             lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
+
+            /* B * At */
+            lhs_sum += *p_B_1 * *p_At;
+            p_B_1++;
+            p_At += N;
 
             /* A2 * B */
 			rhs_sum += *p_A2 * *p_B_2;
-            
-            p_B_1++;
             p_A2++;
-           
-            p_At += N;
             p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+            /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
+             /* A2 * B */
+			rhs_sum += *p_A2 * *p_B_2;
+            p_A2++;
+            p_B_2 += N;
+
         }
 
 		LHS[li * N + ci] = lhs_sum;
