@@ -1,5 +1,6 @@
 /*
- * Tema 2 ASC
+ * Homework number 2 ASC 2020 
+ * @author: Andrei Gabriel Popescu 333CA
  * 2020 Spring
  */
 #include "utils.h"
@@ -40,8 +41,10 @@ double* optimal_solver(int N, double *A, double* B) {
     /**
      * Separately calculte the A * A matrix as A2 
      * and the transpose O(N3)
+     * 
+     * Main speedup technique was of course using register pointers and
+     * sum and then look unrolling on BLOCK which is 40
      * */ 
-    /* Loop unrolling */
 	for (li = 0; li < N; li++) {
         register double* p_A_orig = &A[li * N];
 

@@ -23,9 +23,9 @@ do
     # Test blas flavour
     ./tema2_blas input &>> logile
     #------------------- Crectness -------------------------
-    ./compare out1 /export/asc/tema2/out1 0.01
-    ./compare out2 /export/asc/tema2/out2 0.01
-    ./compare out3 /export/asc/tema2/out3 0.01
+    ./compare out1 /export/asc/tema2/out1 0.001
+    ./compare out2 /export/asc/tema2/out2 0.001
+    ./compare out3 /export/asc/tema2/out3 0.001
 
     # ------------- Execution for NEOPT --------------------
     #
@@ -34,9 +34,9 @@ do
     ./tema2_neopt input &>> logile
 
     #------------------- Crectness -------------------------
-    ./compare out1 /export/asc/tema2/out1 0.01
-    ./compare out2 /export/asc/tema2/out2 0.01
-    ./compare out3 /export/asc/tema2/out3 0.01
+    ./compare out1 /export/asc/tema2/out1 0.001
+    ./compare out2 /export/asc/tema2/out2 0.001
+    ./compare out3 /export/asc/tema2/out3 0.001
 
     # ------------- Execution for OPT_M --------------------
     #
@@ -45,9 +45,9 @@ do
     ./tema2_opt_m input &>> logile
 
     #------------------- Crectness -------------------------
-    ./compare out1 /export/asc/tema2/out1 0.01
-    ./compare out2 /export/asc/tema2/out2 0.01
-    ./compare out3 /export/asc/tema2/out3 0.01
+    ./compare out1 /export/asc/tema2/out1 0.001
+    ./compare out2 /export/asc/tema2/out2 0.001
+    ./compare out3 /export/asc/tema2/out3 0.001
 
     # ------------- Execution for OPT_F --------------------
     #
@@ -56,9 +56,9 @@ do
     ./tema2_opt_f input &>> logile 
 
     #------------------- Crectness -------------------------
-    ./compare out1 /export/asc/tema2/out1 0.01
-    ./compare out2 /export/asc/tema2/out2 0.01
-    ./compare out3 /export/asc/tema2/out3 0.01
+    ./compare out1 /export/asc/tema2/out1 0.001
+    ./compare out2 /export/asc/tema2/out2 0.001
+    ./compare out3 /export/asc/tema2/out3 0.001
 
     # ------------- Execution for OPT_F_EXTRA --------------
     #
@@ -67,9 +67,9 @@ do
     ./tema2_opt_f_extra input &>> logile
 
     #------------------- Crectness -------------------------
-    ./compare out1 /export/asc/tema2/out1 0.01
-    ./compare out2 /export/asc/tema2/out2 0.01
-    ./compare out3 /export/asc/tema2/out3 0.01
+    ./compare out1 /export/asc/tema2/out1 0.001
+    ./compare out2 /export/asc/tema2/out2 0.001
+    ./compare out3 /export/asc/tema2/out3 0.001
 
 done
 

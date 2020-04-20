@@ -1,5 +1,6 @@
 /*
- * Tema 2 ASC
+ * Homework number 2 ASC 2020 
+ * @author: Andrei Gabriel Popescu 333CA
  * 2020 Spring
  */
 #include <stdlib.h>
