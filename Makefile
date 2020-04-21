@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-Wall -Werror -O0 -g
 OPT_CFLAGS=-Wall -Werror -O3
-EXTRA_OPT_CFLAGS= -fallow-store-data-races -fstack-arrays
+EXTRA_OPT_CFLAGS=-Wall -Werror -Ofast
 LIBDIRS=-L/usr/lib64/atlas
 LIBS=-lsatlas
 
