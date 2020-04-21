@@ -20,7 +20,7 @@ tema2_opt_f: solver_neopt.c main.c utils.h
 	$(CC) $(OPT_CFLAGS) $^ -o $@
 
 tema2_opt_f_extra: solver_neopt.c main.c utils.h
-	$(CC) $(OPT_CFLAGS) $(EXTRA_OPT_CFLAGS) $^ -o $@
+	$(CC) $(EXTRA_OPT_CFLAGS) $^ -o $@
 
 compare: compare.c utils.h
 	$(CC) $(OPT_CFLAGS) $^ -lm -o $@

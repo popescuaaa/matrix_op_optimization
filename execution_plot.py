@@ -33,7 +33,7 @@ def extract_data():
 
 def write_data():
     extract_data()
-    file = open("plot", "w")
+    file = open("plot_n1200", "w")
     for arr in DATA:
         file.write('============================\n')
         for elem in arr:
