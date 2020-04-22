@@ -9,3 +9,4 @@ Computer Architecture Second Assignment 2020
 ----
 >```Run=./tema2_blas: N=400: Time=0.077897 Run=./tema2_blas: N=800: Time=0.383385 Run=./tema2_blas: N=1200: Time=1.229295 ```
 ----
+
