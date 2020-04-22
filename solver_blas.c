@@ -86,7 +86,33 @@ double *my_solver(int N, double *A, double *B)
 		N);
 
 
-	/* A2 */
+	/**
+	 * Here is the method that holds the ideea of 
+	 * upper traingular but there is no significat time 
+	 * improvement and I decided not to use this as basically
+	 * I want at first to make a fair comparation with the optm_m.
+	 * 
+	 * 
+	 * apha * A * B
+	 * 
+	 * cblas_dtrmm (
+	 *  	CblasRowMajor,
+	 * 		CblasLeft,
+	 * 		CblasUpper,
+	 * 		CblasNoTrans,
+	 * 		CblasNonUnit,
+	 * 		N,
+	 * 		N,
+	 * 		alpha,
+	 * 		A,
+	 * 		N,
+	 * 		A, -> the result is in A
+	 * 		N
+	 * )
+	 * 
+	 * 
+	 * 
+	 *  A2 */
 	cblas_dgemm(
 		CblasRowMajor,
 		CblasNoTrans,

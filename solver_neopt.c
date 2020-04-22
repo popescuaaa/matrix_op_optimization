@@ -14,7 +14,7 @@
  * @return: The transpose of a matrix
  * 
  **/ 
-double* transpose(int N, double *M) 
+double* transpose(int N, double *M)
 {   
     size_t li;
     size_t ci;
